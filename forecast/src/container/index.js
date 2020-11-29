@@ -16,25 +16,6 @@ const [latitude, setLatitude] = useState('');
 const [long, setLong] = useState('');
 
 
-// useEffect(() => {
-// const getWheaterInfo =  async () =>{
-// const api_call = await fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=0a2d214d66c2ae5cece6f107a2686626');  
-// const response = await api_call.json();
-// setTemperature(response.main.temp);
-// setHumidity(response.main.humidity);
-// setMaxtemp(response.main.temp_max);
-// setMintemp(response.main.temp_min);
-// setPressure(response.main.pressure);
-// setLatitude(response.coord.lat);
-// setLong(response.coord.lon);
-// console.log(response);
-// }
-// getWheaterInfo();
-// }
-// ,[]);
-
-
-
 const getWheaterInfo =  async (e) =>{
 
     e.preventDefault();
@@ -54,27 +35,30 @@ const getWheaterInfo =  async (e) =>{
     setPressure(response.main.pressure);
     setLatitude(response.coord.lat);
     setLong(response.coord.lon);
+
+    // getMap();
 }
 
 
-const getMap = () =>
-{
-console.log('Entro');
-if (latitude)
-{
-    console.log('Hay Latitud');
-return ( 
+// const getMap = () =>
+// {
+// console.log('Entro');
+// if (latitude)
+// {
+//     console.log(latitude,long);
+// return ( 
 
-<div> <MapView lati='13' longi='-86'/></div>
-)
-}
-console.log('No hay Latitud');
-return (
+// <div> <MapView lati={latitude} longi={long}/> </div>
+// )
+// }
+// else{ console.log('No hay Latitud');
+// return (
     
- <div> <MapView lati='13' longi='-86'/> </div> 
- )
+//  <div> <MapView lati='13' longi='-86'/> </div> 
+//  )}
 
-}
+
+// }
 
 
 
@@ -97,27 +81,18 @@ onChange={(e) => setCity(e.target.value)}/>
 
 
 <div className="labels">
-<h1>Ciudad</h1>
-<h1>Temperatura</h1>
-<h1>Humedad</h1>
-<h1>Temperatura Minima</h1>
-<h1>Temperatura Maxima</h1>
-<h1>Presion</h1>
-<h1>Latitude</h1>
-<h1>Longitud</h1>
+<h1>Ciudad =  {city} </h1>
+<h1>Temperatura = {temperature} </h1>
+<h1>Humedad = {humidity} </h1>
+<h1>Temperatura Minima = {mintemp}</h1>
+<h1>Temperatura Maxima = {maxtemp}</h1>
+<h1>Presion = {pressure}</h1>
+<h1>Latitude = {latitude}</h1>
+<h1>Longitud = {long}</h1>
 
 </div>
 
-<h1>{city}</h1>
-<h1>{temperature}</h1>
-<h1>{humidity}</h1>
-<h1>{mintemp}</h1>
-<h1>{maxtemp}</h1>
-<h1>{pressure}</h1>
-<h1>{latitude}</h1>
-<h1>{long}</h1>
-
-<div>{getMap()}</div>
+<MapView latitud={latitude} longi={long}/>
 
 </div>
 
