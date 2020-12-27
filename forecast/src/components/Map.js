@@ -1,11 +1,13 @@
-import React from 'react'
+import {React,useState} from 'react'
 import { TileLayer, Marker, Popup, MapContainer } from 'react-leaflet'
 
 import "leaflet/dist/leaflet.css";
 import './styles.css'
 
 
-const MapView =({latitud, longitud})=>{
+const MapView =({latitud, longitud, ciudad })=>{
+
+    
 
     const position = [latitud, longitud];
 
@@ -13,17 +15,15 @@ const MapView =({latitud, longitud})=>{
     return <div></div>;
 
     return (
-        <div className="col-12 mapdiv">
+        <div>
 
-            <MapContainer center={position} zoom={13} >
+            <MapContainer center={position} zoom={5} >
                 <TileLayer
                 attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                 url='https://{s}.tile.osm.org/{z}/{x}/{y}.png'
                 />
                 <Marker position={position}>
-                    <Popup>
-                       
-                    </Popup>
+                
                 </Marker>
            </MapContainer>
         
