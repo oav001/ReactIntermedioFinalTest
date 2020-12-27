@@ -17,35 +17,33 @@ const getLocalStorage = () => {
 };
 
 const WheaterForm = () => {
-
-
   const inititalValues = {
-    humidity: '',
-    temp: '',
-    mintemp: '',
-    maxtemp: '',
-    pressure:'',
+    humidity: "",
+    temp: "",
+    mintemp: "",
+    maxtemp: "",
+    pressure: "",
     lat: 13,
     long: -86,
-  } ;
+  };
 
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [data, setData] = useState(inititalValues);
   const [list, setList] = useState(getLocalStorage());
   const [isEditing, setIsEditing] = useState(false);
   const [editID, setEditID] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
 
-  
-
   //MANEJADOR DEL EVENTO
   const handleSubmit = (e) => {
     e.preventDefault();
-    getWheaterInfo();
+    
 
     if (!name) {
       showAlert(true, "danger", "Por favor ingrese un pais");
+      
     } else if (name && isEditing) {
+      getWheaterInfo();
       setList(
         list.map((item) => {
           if (item.id === editID) {
@@ -55,7 +53,7 @@ const WheaterForm = () => {
         })
       );
       setName("");
-      
+
       setEditID(null);
       setIsEditing(false);
       showAlert(true, "success", "value changed");
@@ -102,18 +100,23 @@ const WheaterForm = () => {
     );
 
     const data = await response.json();
-    
-    const newData = { 
-    lat:data.coord.lat,
-    long:data.coord.lon,
-    temp:data.main.temp,
-    humidity:data.main.humidity,
-    maxtemp:data.main.temp_max,
-    mintemp:data.main.temp_min,
-    pressure:data.main.pressure,
-    }
+    console.log(data);
+  
+
+    const newData = {
+      lat: data.coord.lat,
+      long: data.coord.lon,
+      temp: data.main.temp,
+      humidity: data.main.humidity,
+      maxtemp: data.main.temp_max,
+      mintemp: data.main.temp_min,
+      pressure: data.main.pressure,
+    };
     console.log(newData);
+    
     setData(newData);
+
+    
     
   };
   //Final
@@ -161,8 +164,7 @@ const WheaterForm = () => {
         </div>
 
         <Form md>
-
-        <Row>
+          <Row>
             <Col>
               <Form.Label> Latitud = {data.lat} </Form.Label>
             </Col>
@@ -186,15 +188,12 @@ const WheaterForm = () => {
             <Col>
               <Form.Label>Temperatura Maxima = {data.maxtemp} </Form.Label>
             </Col>
-
           </Row>
 
-          
           <Row>
             <Col>
               <Form.Label>Presion = {data.pressure} </Form.Label>
             </Col>
-       
           </Row>
         </Form>
 
